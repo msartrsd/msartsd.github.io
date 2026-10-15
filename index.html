@@ -1,0 +1,468 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SUSHI MEI — Японская кухня</title>
+<style>
+:root {
+  --green: #263d2d;
+  --cream: #f6f4ed;
+  --lime: #d9e6a2;
+  --red: #c94c35;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--cream);
+  color: #20231d;
+}
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; font: inherit; }
+header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #f6f4edee;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #ddd;
+}
+nav {
+  max-width: 1150px;
+  margin: auto;
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.logo { font-size: 23px; font-weight: 900; letter-spacing: 3px; }
+nav .links { display: flex; gap: 25px; }
+nav a:hover { color: var(--red); }
+.btn {
+  display: inline-block;
+  background: var(--green);
+  color: white;
+  border: 0;
+  border-radius: 30px;
+  padding: 14px 23px;
+  font-weight: bold;
+}
+.btn:hover { background: #405d42; }
+.hero {
+  max-width: 1150px;
+  margin: auto;
+  padding: 65px 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 45px;
+}
+.eyebrow {
+  color: #496448;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 3px;
+}
+h1 {
+  font-size: clamp(48px, 6vw, 78px);
+  line-height: .98;
+  letter-spacing: -4px;
+  margin: 22px 0;
+}
+h1 em { color: #496448; font-family: Georgia, serif; }
+.hero p, .about p {
+  color: #73776d;
+  line-height: 1.8;
+  font-size: 16px;
+}
+.hero img {
+  width: 100%;
+  height: 440px;
+  object-fit: cover;
+  border-radius: 25px;
+}
+.hero-buttons { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 25px; }
+.btn-outline {
+  background: transparent;
+  color: var(--green);
+  border: 1px solid #aaa;
+}
+section { padding: 75px 24px; }
+.container { max-width: 1150px; margin: auto; }
+h2 {
+  font-size: clamp(34px, 4vw, 50px);
+  letter-spacing: -2px;
+  margin: 15px 0;
+}
+.section-desc { color: #73776d; line-height: 1.7; }
+.filters { display: flex; gap: 10px; flex-wrap: wrap; margin: 28px 0; }
+.filter {
+  padding: 10px 18px;
+  border-radius: 25px;
+  border: 1px solid #ddd;
+  background: transparent;
+}
+.filter.active, .filter:hover {
+  background: var(--green);
+  color: white;
+}
+.products {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+.product {
+  background: white;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid #e9e7df;
+  transition: .2s;
+}
+.product:hover { transform: translateY(-4px); }
+.product img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+.product-body { padding: 16px; }
+.product h3 { margin: 0 0 10px; }
+.product p { color: #777; font-size: 13px; line-height: 1.6; min-height: 40px; }
+.product-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+.price { font-weight: 800; font-size: 14px; }
+.add {
+  border: 0;
+  border-radius: 50%;
+  background: var(--green);
+  color: white;
+  width: 38px;
+  height: 38px;
+  font-size: 23px;
+}
+.promo {
+  background: var(--green);
+  color: white;
+  border-radius: 25px;
+  padding: 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  align-items: center;
+}
+.promo p { color: #d5ddcf; line-height: 1.8; }
+.promo img { width: 100%; height: 270px; object-fit: cover; border-radius: 18px; }
+.light { background: var(--lime); color: var(--green); }
+.about {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 45px;
+  align-items: center;
+}
+.about img { width: 100%; height: 390px; object-fit: cover; border-radius: 22px; }
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+.contact { background: #e9ebdf; }
+form { background: white; padding: 25px; border-radius: 20px; }
+label { display: block; margin: 15px 0 7px; font-size: 13px; font-weight: bold; }
+input, textarea, select {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background: #fffefb;
+  font: inherit;
+}
+textarea { min-height: 90px; resize: vertical; }
+form .btn { width: 100%; margin-top: 18px; }
+footer { background: #171a15; color: white; padding: 35px 24px; }
+.footer-inner {
+  max-width: 1150px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+footer p { color: #aaa; line-height: 1.7; }
+.cart-button { position: relative; }
+#count {
+  background: var(--red);
+  border-radius: 20px;
+  padding: 2px 6px;
+  font-size: 11px;
+}
+#cart {
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: min(420px, 100%);
+  background: white;
+  z-index: 30;
+  padding: 25px;
+  box-shadow: 0 0 0 100vmax #0008;
+  display: none;
+  overflow: auto;
+}
+#cart.show { display: block; }
+.cart-item {
+  padding: 14px 0;
+  border-bottom: 1px solid #ddd;
+}
+.cart-item button {
+  margin: 8px 5px 0 0;
+  padding: 5px 10px;
+}
+.close { float: right; }
+@media(max-width:850px) {
+  .products { grid-template-columns: repeat(2, 1fr); }
+  .hero { gap: 25px; }
+  nav .links { gap: 12px; }
+}
+@media(max-width:600px) {
+  nav { padding: 15px; flex-wrap: wrap; }
+  nav .links { width: 100%; justify-content: space-between; font-size: 13px; }
+  .hero, .about, .promo, .contact-grid { grid-template-columns: 1fr; }
+  .hero { padding-top: 35px; }
+  .hero img { height: 300px; }
+  .products { gap: 10px; }
+  .product img { height: 135px; }
+  .product-body { padding: 11px; }
+  .product h3 { font-size: 14px; }
+  .price { font-size: 12px; }
+  .promo { padding: 25px; }
+  .about img { height: 280px; }
+  section { padding: 50px 16px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a class="logo" href="#home">芽 SUSHI MEI</a>
+    <div class="links">
+      <a href="#menu">Меню</a>
+      <a href="#about">О нас</a>
+      <a href="#delivery">Доставка</a>
+      <a href="#contacts">Контакты</a>
+    </div>
+    <button class="btn cart-button" onclick="toggleCart()">
+      Корзина <span id="count">0</span>
+    </button>
+  </nav>
+</header>
+
+<main>
+<section class="hero" id="home">
+  <div>
+    <div class="eyebrow">SUSHI MEI · TASHKENT</div>
+    <h1>Япония<br>ближе, чем<br><em>кажется.</em></h1>
+    <p>Роллы, суши и сеты для маленьких поводов и больших встреч. Выбирайте любимое — остальное оставьте нам.</p>
+    <div class="hero-buttons">
+      <a class="btn" href="#menu">Смотреть меню ↘</a>
+      <a class="btn btn-outline" href="#about">О ресторане</a>
+    </div>
+  </div>
+  <img src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=1000&q=85" alt="Суши и роллы">
+</section>
+
+<section id="menu">
+  <div class="container">
+    <div class="eyebrow">НАШЕ МЕНЮ</div>
+    <h2>Выбирайте своё любимое.</h2>
+    <p class="section-desc">Японская кухня для любого настроения.</p>
+    <div class="filters">
+      <button class="filter active" onclick="filterMenu('all',this)">Всё меню</button>
+      <button class="filter" onclick="filterMenu('rolls',this)">Роллы</button>
+      <button class="filter" onclick="filterMenu('baked',this)">Запечённые</button>
+      <button class="filter" onclick="filterMenu('sets',this)">Сеты</button>
+      <button class="filter" onclick="filterMenu('sushi',this)">Суши</button>
+    </div>
+    <div class="products" id="products"></div>
+    <p class="section-desc">Примечание: названия, состав и цены — демонстрационные. Замените их на актуальное меню ресторана.</p>
+  </div>
+</section>
+
+<section id="delivery">
+  <div class="container promo">
+    <div>
+      <div class="eyebrow" style="color:#d9e6a2">ВАШ ВЕЧЕР — НАШЕ ДЕЛО</div>
+      <h2>Соберите свой идеальный сет.</h2>
+      <p>Уютный вечер дома или встреча с друзьями — выбирайте любимые вкусы и делитесь ими с близкими.</p>
+      <a class="btn light" href="#menu">Собрать заказ ↗</a>
+    </div>
+    <img src="https://images.unsplash.com/photo-1617196034796-73dfa7b1fd56?auto=format&fit=crop&w=1000&q=80" alt="Сет роллов">
+  </div>
+</section>
+
+<section id="about">
+  <div class="container about">
+    <img src="https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=1000&q=85" alt="Японская кухня">
+    <div>
+      <div class="eyebrow">О НАС</div>
+      <h2>Простые вещи. Особенный вкус.</h2>
+      <p>SUSHI MEI — концепция японской кухни, где важны не только ингредиенты, но и настроение.</p>
+      <p>Мы верим, что хорошая еда объединяет людей, а любимые роллы могут превратить обычный вечер в маленький праздник.</p>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contacts">
+  <div class="container contact-grid">
+    <div>
+      <div class="eyebrow">КОНТАКТЫ</div>
+      <h2>Давайте знакомиться.</h2>
+      <p class="section-desc">Ташкент, Узбекистан</p>
+      <p>Телефон: добавьте номер ресторана</p>
+      <p>График работы: укажите актуальное время</p>
+      <p>Instagram / Telegram: добавьте ссылки</p>
+    </div>
+    <form id="orderForm">
+      <h3>Оставить заявку</h3>
+      <label for="name">Ваше имя</label>
+      <input id="name" required placeholder="Как к вам обращаться">
+      <label for="phone">Телефон</label>
+      <input id="phone" type="tel" required placeholder="+998">
+      <label for="message">Комментарий</label>
+      <textarea id="message" placeholder="Ваш вопрос или пожелание"></textarea>
+      <button class="btn" type="submit">Подготовить заявку ↗</button>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="logo">芽 SUSHI MEI</div>
+      <p>Японская кухня для особенных моментов.</p>
+    </div>
+    <p>© <span id="year"></span> SUSHI MEI</p>
+  </div>
+</footer>
+
+<div id="cart">
+  <button class="close btn" onclick="toggleCart()">Закрыть ×</button>
+  <h2>Ваша корзина</h2>
+  <div id="cartItems"></div>
+  <h3>Итого: <span id="total">0 сум</span></h3>
+  <button class="btn" onclick="checkout()">Оформить заявку</button>
+</div>
+
+<script>
+const dishes = [
+  {id:1,name:"Филадельфия",cat:"rolls",price:59000,desc:"Лосось, сливочный сыр, рис и нори.",img:"https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=700&q=80"},
+  {id:2,name:"Калифорния",cat:"rolls",price:49000,desc:"Огурец, авокадо и нежный вкус.",img:"https://images.unsplash.com/photo-1617196034796-73dfa7b1fd56?auto=format&fit=crop&w=700&q=80"},
+  {id:3,name:"Дракон",cat:"rolls",price:69000,desc:"Яркий вкус и красивая подача.",img:"https://images.unsplash.com/photo-1611143669185-af224c5e3252?auto=format&fit=crop&w=700&q=80"},
+  {id:4,name:"Запечённый лосось",cat:"baked",price:64000,desc:"Тёплый ролл с фирменным соусом.",img:"https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=700&q=80"},
+  {id:5,name:"Запечённый краб",cat:"baked",price:56000,desc:"Краб, сыр и кунжут.",img:"https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?auto=format&fit=crop&w=700&q=80"},
+  {id:6,name:"Сет Mei",cat:"sets",price:189000,desc:"Ассорти роллов для двоих.",img:"https://images.unsplash.com/photo-1617196034796-73dfa7b1fd56?auto=format&fit=crop&w=700&q=80"},
+  {id:7,name:"Большой сет",cat:"sets",price:279000,desc:"Разнообразие вкусов для компании.",img:"https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=700&q=80"},
+  {id:8,name:"Нигири лосось",cat:"sushi",price:29000,desc:"Рис и лосось — ничего лишнего.",img:"https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?auto=format&fit=crop&w=700&q=80"}
+];
+
+let cart = {};
+const money = n => new Intl.NumberFormat("ru-RU").format(n) + " сум";
+
+function renderProducts(category="all") {
+  const list = dishes.filter(d => category==="all" || d.cat===category);
+  document.getElementById("products").innerHTML = list.map(d => `
+    <article class="product">
+      <img src="${d.img}" alt="${d.name}" loading="lazy">
+      <div class="product-body">
+        <h3>${d.name}</h3>
+        <p>${d.desc}</p>
+        <div class="product-bottom">
+          <span class="price">${money(d.price)}</span>
+          <button class="add" onclick="add(${d.id})">+</button>
+        </div>
+      </div>
+    </article>`).join("");
+}
+
+function filterMenu(category,button) {
+  document.querySelectorAll(".filter").forEach(b=>b.classList.remove("active"));
+  button.classList.add("active");
+  renderProducts(category);
+}
+
+function add(id) {
+  cart[id] = (cart[id] || 0) + 1;
+  renderCart();
+}
+
+function change(id,delta) {
+  cart[id] = (cart[id] || 0) + delta;
+  if(cart[id] <= 0) delete cart[id];
+  renderCart();
+}
+
+function renderCart() {
+  const entries = Object.entries(cart);
+  const count = entries.reduce((s,[,q])=>s+q,0);
+  document.getElementById("count").textContent = count;
+  document.getElementById("cartItems").innerHTML = entries.length
+    ? entries.map(([id,q])=>{
+      const d = dishes.find(x=>x.id===Number(id));
+      return `<div class="cart-item">
+        <strong>${d.name}</strong><br>
+        ${money(d.price)} × ${q}
+        <div>
+          <button onclick="change(${id},-1)">−</button>
+          <button onclick="change(${id},1)">+</button>
+        </div>
+      </div>`;
+    }).join("")
+    : "<p>Корзина пока пуста.</p>";
+  const total = entries.reduce((s,[id,q])=>s+dishes.find(d=>d.id===Number(id)).price*q,0);
+  document.getElementById("total").textContent = money(total);
+}
+
+function toggleCart() {
+  document.getElementById("cart").classList.toggle("show");
+}
+
+function checkout() {
+  const entries = Object.entries(cart);
+  if(!entries.length) {
+    alert("Сначала добавьте блюда в корзину.");
+    return;
+  }
+  const lines = entries.map(([id,q])=>{
+    const d=dishes.find(x=>x.id===Number(id));
+    return `${d.name} × ${q} — ${money(d.price*q)}`;
+  });
+  const total = entries.reduce((s,[id,q])=>s+dishes.find(d=>d.id===Number(id)).price*q,0);
+  document.getElementById("message").value =
+    "Мой заказ SUSHI MEI:\n" + lines.join("\n") + "\nИтого: " + money(total);
+  toggleCart();
+  document.getElementById("contacts").scrollIntoView({behavior:"smooth"});
+}
+
+document.getElementById("orderForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  const name=document.getElementById("name").value;
+  const phone=document.getElementById("phone").value;
+  const message=document.getElementById("message").value;
+  const text=`Здравствуйте, SUSHI MEI!\nИмя: ${name}\nТелефон: ${phone}\nЗаказ: ${message}`;
+  window.open("https://wa.me/?text="+encodeURIComponent(text),"_blank");
+});
+
+document.getElementById("year").textContent = new Date().getFullYear();
+renderProducts();
+renderCart();
+</script>
+</body>
+</html>
